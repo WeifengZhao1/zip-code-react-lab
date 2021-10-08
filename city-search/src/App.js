@@ -6,19 +6,17 @@ function City(props) {
     <div>
       <div className="CityLocation">{props.CityLocation}</div>
       <ul>
-        <li> State: {props.State}</li>
-        <li>Location: ({props.Lat},{props.Long})</li>
-        <li>Population: (estimated) {props.Population}</li>
-        <li>Total Wages: {props.TotalWages}</li>
+        <li> {props.data}</li>
       </ul>
+      
     </div>
   );
 }
 
 function ZipSearchField(props) {
   return (
-    <div className="zipcode">Zip Code:
-      <input type="text" placeholder="  Try 10016" onChange={props.changeHandler} />
+    <div className="zipcode">Enter a City Name:
+      <input type="text" placeholder="enter a city name" onChange={props.changeHandler} />
     </div>);
 }
 
@@ -33,8 +31,8 @@ class App extends Component {
     console.log(event.target.value);
     this.setState({ zipCode: event.target.value }) 
 
-    if (event.target.value.length === 5) {
-      fetch('http://ctp-zip-api.herokuapp.com/zip/' + event.target.value)
+    if (event.target.value.length > 0) {
+      fetch('https://ctp-zip-api.herokuapp.com/city/' + event.target.value.toUpperCase())
         .then((res) => res.json())
         .then((data) => {
           console.log(data)
@@ -50,28 +48,14 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Zip Code Search</h2>
+          <h2>City ZipCode Search</h2>
         </div>
         <ZipSearchField zipCode={this.state.zipCode} changeHandler={this.zipChanged}/>
         <div>
           {
             this.state.cities.map((city) =>
-              <City
-                State={city.State}
-                Population={city.EstimatedPopulation}
-                TotalWages={city.TotalWages}
-                Lat={city.Lat}
-                Long={city.Long}
-                CityLocation={city.LocationText}
-              />
+              <City data={city}/>
             )}
-             
-             <div className = "NoResult">
-            {
-              this.state.zipCode.length !== 5 && 
-              <h1>No Result</h1>
-            }
-           </div>
         </div>
       </div>
     );

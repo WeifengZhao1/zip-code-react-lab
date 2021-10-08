@@ -1,0 +1,46 @@
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.wrapper {
+  width: 100%;
+  margin: auto 0;
+}
+
+.box {
+  margin-top: 2rem;
+  border: 0.5px solid #ebebeb;
+}
+
+.title {
+  text-align: center;
+  background-color: #ebebeb;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.content {
+  text-align: left;
+  padding-top: 1rem;
+  padding-left: 7rem;
+  padding-right: 7rem;
+  padding-bottom: 1rem;
+}
+
+body {
+  font-weight: bold;
+}
+
+.zipcode{
+  margin:10px;
+}
